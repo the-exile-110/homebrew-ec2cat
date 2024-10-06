@@ -1,0 +1,42 @@
+version: 2
+project_name: ec2cat
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - main: .
+    binary: ec2cat
+    ldflags: -s -w -X main.version={{.Version}} -X main.revision={{.ShortCommit}} -X main.date={{.Date}}
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - LICENSE
+      - CREDITS
+release:
+  prerelease: auto
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - Merge pull request
+      - Merge branch
+
+brews:
+  - repository:
+      owner: the-exile-110
+      name: homebrew-ec2cat
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}" 
+    homepage: 'https://github.com/the-exile-110/homebrew-ec2cat'
+    description: 'ec2cat is a command line tool to list and filter EC2 instances'
+    license: "MIT"

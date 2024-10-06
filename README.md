@@ -15,6 +15,7 @@ ec2cat is a command-line tool for managing and monitoring AWS EC2 instances acro
 To install ec2cat, you can use Homebrew:
 
 ```bash
+brew tap the-exile-110/ec2cat
 brew install ec2cat
 ```
 
@@ -37,8 +38,8 @@ brew install ec2cat
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/the-exile-110/ec2cat.git
-   cd ec2cat
+   git clone https://github.com/the-exile-110/homebrew-ec2cat.git
+   cd homebrew-ec2cat
    ```
 2. Build the project:
    ```bash
